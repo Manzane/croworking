@@ -8,12 +8,8 @@ class Request < ApplicationRecord
     scope :accepted, -> { where(status: 2) }
     scope :expired, -> { where(status: 3) }
 
-    def accept
+    def accept!
+        self.update!(status: 2)  
     end
-    # request.accept! - method that will allow accepting a request (request being an instance of the class Request)
-    # list the requests by their status using class methods or scopes
-    # Request.unconfirmed - requests for which the email address has not been confirmed
-    # Request.confirmed - requests in the waiting list
-    # Request.accepted - requests that have been accepted by the client
-    # Request.expired
+
 end
