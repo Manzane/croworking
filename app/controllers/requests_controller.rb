@@ -2,6 +2,12 @@ class RequestsController < ApplicationController
     before_action :set_request, only: [:show, :edit, :update]
 
     def show
+        @total = Request.confirmed.count
+        if @request.status != "confirmed"
+            redirect_to root_path, flash: { notice: "Vous ne faites pas partie de la liste d'attente" }
+        else
+            @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id)
+        end  
     end
 
     def new
