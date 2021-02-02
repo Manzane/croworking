@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
     def create
         @request = Request.new(request_params)
         if @request.save
-            redirect_to request_path(@request), flash: { notice: "Creation" }
+            redirect_to thank_you_path, flash: { notice: "Creation" }
         else
             render :new, flash: { error: "Could not create model" }
         end
