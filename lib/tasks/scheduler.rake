@@ -8,12 +8,12 @@ task :reconfirmation => :environment do
     requests.each do |request|   
         # byebug
         # si il n'y a pas de date de reconfirmation ou si la date de reconfirmation approche 3 mois
-        if (!request.reconfirmation_date && (date - request.email_confirmation_date).to_i == 90 )
+        if (!request.reconfirmation_date && (date - request.email_confirmation_date).to_i == 92 )
             # byebug
             puts "1 - #{request.id} - #{(date - request.email_confirmation_date).to_i}j - #{request.email_confirmation_date}"
             request.send_reconfirmation_email 
         elsif request.reconfirmation_date?
-            if (date - request.reconfirmation_date).to_i == 90
+            if (date - request.reconfirmation_date).to_i == 92
                 puts "2 - #{request.id} - #{(date - request.reconfirmation_date).to_i}j - #{request.reconfirmation_date}"
                 request.send_reconfirmation_email
                 # byebug
