@@ -9,6 +9,10 @@ class RequestMailer < ApplicationMailer
       @request = params[:request] # Instance variable => available in view
       mail(to: @request.email, subject: 'Confirmation de votre adresse')
   end
+  def reconfirmation
+    @request = params[:request] # Instance variable => available in view
+    mail(to: @request.email, subject: 'Confirmez à nouveau votre place!')
+end
 
   def welcome
     @request = params[:request] # Instance variable => available in view
