@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
         if @request.status != "confirmed"
             redirect_to root_path, flash: { notice: "Vous ne faites pas partie de la liste d'attente" }
         else
-            @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id)
+            @index = Request.confirmed.order(email_confirmation_date: :asc).pluck(:id).index(@request.id) + 1
         end  
     end
 
@@ -17,7 +17,10 @@ class RequestsController < ApplicationController
     def create
         @request = Request.new(request_params)
         if @request.save
-            redirect_to thank_you_path, flash: { notice: "Creation" }
+            @request.set_confirmation_token
+            @request.save         
+            @request.send_confirmation_email
+            redirect_to thank_you_path, flash: { success: "creation" }
         else
             render :new, flash: { error: "Could not create model" }
         end
@@ -29,17 +32,43 @@ class RequestsController < ApplicationController
     def update
         @request.update(request_params)
         if  @request.save
-            redirect_to request_path(@request), flash: { notice: "Update" }
+            redirect_to request_path(@request), flash: { success: "Update" }
         else
             render :edit, flash: { error: "Could not update model" }  
         end
     end
 
-    
-    # def destroy
-    #     @request.destroy
-    #     redirect_to requests_path
-    # end
+    def confirm_email
+        request = Request.find_by_confirm_token(params[:token])
+        if request
+           request.validate_email
+           if request.save
+                request.send_waiting_list_entry
+                redirect_to request
+            else
+                flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"
+            end
+        else
+           flash[:error] = "Désolé, la demande n'existe pas !"
+           redirect_to root_url
+       end
+    end
+
+    def reconfirm_email
+        request = Request.find_by_confirm_token(params[:token])
+        if request
+           request.update(reconfirmation_date: Time.now)
+           if request.save
+                # request.send_reconfirmation_email
+                redirect_to request
+            else
+                flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"
+            end
+        else
+           flash[:error] = "Désolé, la demande n'existe pas !"
+           redirect_to root_url
+       end
+    end
 
 
     private

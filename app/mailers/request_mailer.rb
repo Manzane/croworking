@@ -1,10 +1,5 @@
 class RequestMailer < ApplicationMailer
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.request_mailer.confirmation.subject
-  #
   def confirmation
       @request = params[:request]
       mail(to: @request.email, subject: 'Confirmation de votre adresse')
@@ -12,7 +7,7 @@ class RequestMailer < ApplicationMailer
   def reconfirmation
     @request = params[:request]
     @total = Request.confirmed.count
-    @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id)
+    @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id) + 1
     mail(to: @request.email, subject: 'Confirmez à nouveau votre place!')
 end
 
@@ -24,7 +19,7 @@ end
   def waitinglist_entry
     @request = params[:request]
     @total = Request.confirmed.count
-    @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id)
+    @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id) + 1
     mail(to: @request.email, subject: 'Bienvenue sur la Waiting List !')
   end
 

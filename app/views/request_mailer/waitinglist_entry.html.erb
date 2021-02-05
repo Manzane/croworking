@@ -1,4 +1,13 @@
-<h1>Bonjour <%= @request.first_name %></h1>
-<p>Bienvenue sur la Waiting Liste, vous êtes <%= @index %> sur <%= @total %></p>
+<h1>A quelques pas de L'espace Coworking</h1>
+<h2>Bonjour <%= @request.first_name %> <%= @request.last_name %></h2>
+<p>Bienvenue sur la liste d'attente, vous êtes <%= @index %> sur <%= @total %></p>
+<p>Nous espérons que vous nous rejoindrez vite ! Cependant, si l'attente dure, un email vous sera envoyé tous les 3 mois, vous demandant de confirmer votre volonté de nous rejoindre</p>
+<p>Attention, Si vous ne répondez pas, votre demande expirera et vous serez retiré de la file d'attente.</p> 
+<p>Pour rappel, voici vos infos:</p>
+<p>Téléphone: <%= @request.phone_number %></p>
+<p>Email: <%= @request.email %></p>
+<p>Biography: <%= @request.biography %></p>
+<p>Date de confirmation d'email<%= @request.email_confirmation_date %></p>
+<p>Dernière reconfirmation:<%= @request.reconfirmation_date %></p>
 <p>L'équipe Coworking</p>
 

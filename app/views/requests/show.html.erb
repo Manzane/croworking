@@ -5,11 +5,9 @@
     <p>Nous espérons que vous nous rejoindrez vite ! Cependant, si l'attente dure, un email vous sera envoyé tous les 3 mois, vous demandant de confirmer votre volonté de nous rejoindre</p>
     <p>Attention, Si vous ne répondez pas, votre demande expirera et vous serez retiré de la file d'attente.</p> 
     <p>Vos infos:</p>
-    <p><%= @request.phone_number %></p>
-    <p><%= @request.email %></p>
-    <p><%= @request.biography %></p>
-    <p><%= @request.email_confirmation_date %></p>
-    <p><%= @request.status %></p>
-    <p><%= @request.reconfirmation_date %></p>
-
+    <p>Téléphone: <%= @request.phone_number %></p>
+    <p>Email: <%= @request.email %></p>
+    <p>Biography: <%= @request.biography %></p>
+    <p>Date de confirmation d'email<%= @request.email_confirmation_date %></p>
+    <p>Dernière reconfirmation:<%= @request.reconfirmation_date %></p>
 </div>

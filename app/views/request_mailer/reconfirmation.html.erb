@@ -1,7 +1,8 @@
 <h1>Bonjour <%= @request.first_name %></h1>
 <p>Nous sommes navrés pour cette attente, vous êtes <%= @index %> sur <%= @total %></p>
 <p>Vous voulez toujours nous rejoindre ?</p>
-<a>Confirmer votre place</a>
-<p>Dans le cas contraire, votre nom sera retiré de la liste d'attente.</p>
+<%= link_to "Confirmer à nouveau votre demande", reconfirm_email_url(@request.confirm_token)%>
+<p>Dans le cas contraire, votre nom sera retiré de la liste d'attente dans une semaine.</p>
+<p>Très bonne journée !</p>
 <p>L'équipe Coworking</p>
 

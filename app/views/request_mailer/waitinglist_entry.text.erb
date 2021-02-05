@@ -1,3 +1,12 @@
-Bonjour <%= @request.first_name %>
-Bienvenue sur la Waiting Liste, vous êtes <%= @index %> sur <%= @total %>.
+A quelques pas de L'espace Coworking
+Bonjour <%= @request.first_name %> <%= @request.last_name %>
+Bienvenue sur la liste d'attente, vous êtes <%= @index %> sur <%= @total %>
+Nous espérons que vous nous rejoindrez vite ! Cependant, si l'attente dure, un email vous sera envoyé tous les 3 mois, vous demandant de confirmer votre volonté de nous rejoindre
+Attention, Si vous ne répondez pas, votre demande expirera et vous serez retiré de la file d'attente. 
+Pour rappel, voici vos infos:
+Téléphone: <%= @request.phone_number %>
+Email: <%= @request.email %>
+Biography: <%= @request.biography %>
+Date de confirmation d'email<%= @request.email_confirmation_date %>
+Dernière reconfirmation:<%= @request.reconfirmation_date %>
 L'équipe Coworking
