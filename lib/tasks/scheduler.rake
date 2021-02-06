@@ -23,24 +23,22 @@ task :reconfirmation => :environment do
         end 
     end
   puts "done."
-end
 
-task :expiration => :environment do
-    puts "Checking for expiration..."
-    date = Time.now
-    requests = Request.confirmed
-    requests.each do |request|   
-        if (!request.reconfirmation_date && ((date - (request.email_confirmation_date + 3.month + 1.week)) /86400).to_i == 0 )
-            puts "1 - #{request.id}"
-            request.send_expiration_email 
-            request.update!(status: 3)
-        elsif request.reconfirmation_date?
-            if ((date - (request.reconfirmation_date + 3.month + 1.week)) /86400).to_i == 0
-                puts "2 - #{request.id}"
-                request.send_expiration_email 
-                request.update!(status: 3)
-            end
-        end 
-    end
-    puts "done."
+  puts "Checking for expiration..."
+  date = Time.now
+  requests = Request.confirmed
+  requests.each do |request|   
+      if (!request.reconfirmation_date && ((date - (request.email_confirmation_date + 3.month + 1.week)) /86400).to_i == 0 )
+          puts "1 - #{request.id}"
+          request.send_expiration_email 
+          request.update!(status: 3)
+      elsif request.reconfirmation_date?
+          if ((date - (request.reconfirmation_date + 3.month + 1.week)) /86400).to_i == 0
+              puts "2 - #{request.id}"
+              request.send_expiration_email 
+              request.update!(status: 3)
+          end
+      end 
+  end
+  puts "done."
 end
