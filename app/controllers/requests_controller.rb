@@ -26,17 +26,17 @@ class RequestsController < ApplicationController
         end
     end
 
-    def edit
-    end
+    # def edit
+    # end
 
-    def update
-        @request.update(request_params)
-        if  @request.save
-            redirect_to request_path(@request), flash: { success: "Update" }
-        else
-            render :edit, flash: { error: "Could not update model" }  
-        end
-    end
+    # def update
+    #     @request.update(request_params)
+    #     if  @request.save
+    #         redirect_to request_path(@request), flash: { success: "Update" }
+    #     else
+    #         render :edit, flash: { error: "Could not update model" }  
+    #     end
+    # end
 
     def confirm_email
         request = Request.find_by_confirm_token(params[:token])
@@ -44,7 +44,7 @@ class RequestsController < ApplicationController
            request.validate_email
            if request.save
                 request.send_waiting_list_entry
-                redirect_to request
+                redirect_to waiting_list_path
             else
                 flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"
             end
@@ -60,7 +60,7 @@ class RequestsController < ApplicationController
            request.update(reconfirmation_date: Time.now)
            if request.save
                 # request.send_reconfirmation_email
-                redirect_to request
+                redirect_to waiting_list_path
             else
                 flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"
             end

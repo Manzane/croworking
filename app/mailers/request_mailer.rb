@@ -8,7 +8,7 @@ class RequestMailer < ApplicationMailer
     @request = params[:request]
     @total = Request.confirmed.count
     @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id) + 1
-    mail(to: @request.email, subject: 'Confirmez à nouveau votre place!')
+    mail(to: @request.email, subject: 'Confirmez à nouveau votre demande!')
 end
 
   def welcome
@@ -20,7 +20,7 @@ end
     @request = params[:request]
     @total = Request.confirmed.count
     @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id) + 1
-    mail(to: @request.email, subject: 'Bienvenue sur la Waiting List !')
+    mail(to: @request.email, subject: 'Bienvenue sur la Liste d\'attente !')
   end
 
   def expiration
