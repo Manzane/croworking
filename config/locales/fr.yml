@@ -25,7 +25,6 @@ fr:
         last_name: "Nom"
         password: "Mot de passe"
         password_confirmation: "Confirmation du mot de passe"
-      request/status:
   date:
       formats:
         default: "%A %d/%m/%Y"
