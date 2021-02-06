@@ -23,6 +23,7 @@ Trestle.resource(:requests) do
     column :email_confirmation_date
     column :reconfirmation_date
     column :accepted_at
+    column :rank, -> (request) {(Request.confirmed.order(email_confirmation_date: :asc).pluck(:id).index(request.id)).to_i + 1 if request.confirmed?}
 
     actions do |toolbar, instance, admin|
       toolbar.link 'Accepter', instance, action: :accept, method: :post, style: :primary, icon: "fa fa-thumbs-up", label: 'Accept' if instance.confirmed?

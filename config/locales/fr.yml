@@ -19,6 +19,7 @@ fr:
         email_confirmed: "Email confirmé"
         confirm_token: "Token"
         accepted_at: "Accepté le"
+        rank: "Position"
       administrator:
         first_name: "Prénom"
         last_name: "Nom"
