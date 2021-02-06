@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'contact@freelance-coworking.com'
+  default from: 'contact@space-coworking.com'
   layout 'mailer'
 end

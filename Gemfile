@@ -34,6 +34,7 @@ gem 'simple_form'
 gem 'faker', '~> 1.6', '>= 1.6.3'
 gem 'trestle'
 gem 'trestle-auth'
+gem 'rails-i18n'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

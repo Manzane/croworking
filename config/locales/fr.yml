@@ -1,0 +1,49 @@
+fr:
+  activerecord:
+    models:
+      request: "Demande"
+      administrator: "Administrateur"
+    attributes:
+      request:
+        first_name: "Prénom"
+        last_name: "Nom"
+        full_name: "Nom"
+        phone_number: "N° Téléphone"
+        email: "Email"
+        biography: "Bio"
+        email_confirmation_date: "Date de confirmation d'email"
+        status: "Statut"
+        reconfirmation_date: "Date de reconfirmation"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
+        email_confirmed: "Email confirmé"
+        confirm_token: "Token"
+        accepted_at: "Accepté le"
+      administrator:
+        first_name: "Prénom"
+        last_name: "Nom"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
+      request/status:
+  date:
+      formats:
+        default: "%A %d/%m/%Y"
+      month_names:
+      - 
+      - Janvier
+      - Février
+      - Mars
+      - Avril
+      - Mai
+      - Juin
+      - Juillet
+      - Août
+      - Septembre
+      - Octobre
+      - Novembre
+      - Décembre
+      day_names: [Dimanche, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi]
+      order:
+      - :day
+      - :month
+      - :year

@@ -1,7 +1,9 @@
 class Request < ApplicationRecord
     # after_create :send_confirmation_email
-    validates :first_name, :last_name, :phone_number, :biography, :email, presence: true
+    validates :first_name, :last_name, :biography, :email, :phone_number, presence: true
     validates :email, uniqueness: true
+    validates :phone_number, uniqueness: true, format: { with: /\A(0|\+33)[1-9]([-. ]?[0-9]{2}){4}/, message: "n'est pas valide"}
+    validates :biography, length: { in: 20..250, message: "doit être entre 20 et 250 caratères" }
     enum status: { unconfirmed: 0, confirmed: 1, accepted: 2, expired: 3 }
 
     scope :unconfirmed, -> { where(status: 0) }

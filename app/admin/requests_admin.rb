@@ -1,4 +1,5 @@
 Trestle.resource(:requests) do
+  remove_action :destroy, :new
   menu do
     item :requests, icon: "fa fa-star"
   end

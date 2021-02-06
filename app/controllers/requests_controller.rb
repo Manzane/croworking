@@ -1,14 +1,5 @@
 class RequestsController < ApplicationController
-    before_action :set_request, only: [:show, :edit, :update]
-
-    def show
-        @total = Request.confirmed.count
-        if @request.status != "confirmed"
-            redirect_to root_path, flash: { notice: "Vous ne faites pas partie de la liste d'attente" }
-        else
-            @index = Request.confirmed.order(email_confirmation_date: :asc).pluck(:id).index(@request.id) + 1
-        end  
-    end
+    before_action :set_request, only: [:confirm_email, :reconfirm_email]
 
     def new
         @request = Request.new
@@ -20,18 +11,17 @@ class RequestsController < ApplicationController
             @request.set_confirmation_token
             @request.save         
             @request.send_confirmation_email
-            redirect_to thank_you_path, flash: { success: "creation" }
+            redirect_to thank_you_path
         else
-            render :new, flash: { error: "Could not create model" }
+            render :new, flash: { error: "Une erreur s'est produite, la demande n'a pas été envoyée" }
         end
     end
 
     def confirm_email
-        request = Request.find_by_confirm_token(params[:token])
-        if request
-           request.validate_email
-           if request.save
-                request.send_waiting_list_entry
+        if @request
+           @request.validate_email
+           if @request.save
+                @request.send_waiting_list_entry
                 redirect_to waiting_list_path
             else
                 flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"
@@ -43,11 +33,9 @@ class RequestsController < ApplicationController
     end
 
     def reconfirm_email
-        request = Request.find_by_confirm_token(params[:token])
-        if request
-           request.update(reconfirmation_date: Time.now)
-           if request.save
-                # request.send_reconfirmation_email
+        if @request
+           @request.update(reconfirmation_date: Time.now)
+           if @request.save
                 redirect_to waiting_list_path
             else
                 flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"
@@ -62,7 +50,7 @@ class RequestsController < ApplicationController
     private
 
     def set_request
-      @request = Request.find(params[:id])
+      @request = Request.find_by_confirm_token(params[:token])
     end
 
     def request_params

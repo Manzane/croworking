@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :requests, except: [:index, :destroy]
+  resources :requests, except: [:index, :destroy, :show, :edit, :update]
   root to: 'requests#new'
   get '/:token/confirm_email/', :to => "requests#confirm_email", as: 'confirm_email'
   get '/:token/reconfirm_email/', :to => "requests#reconfirm_email", as: 'reconfirm_email'
