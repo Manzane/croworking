@@ -14,6 +14,7 @@ task :reconfirmation => :environment do
             end 
         elsif request.reconfirmation_date?
             if ((date - (request.reconfirmation_date + 3.month)) /86400).to_i == 0
+                request.set_confirmation_token
                 puts "2 - #{request.id} - #{(date - request.reconfirmation_date).to_i}j - #{request.reconfirmation_date}"
                 if request.save!
                     request.send_reconfirmation_email

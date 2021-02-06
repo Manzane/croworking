@@ -21,6 +21,7 @@ class RequestsController < ApplicationController
         if @request
            @request.validate_email
            if @request.save
+                @request.update(confirm_token: nil)
                 @request.send_waiting_list_entry
                 redirect_to waiting_list_path
             else
@@ -36,6 +37,7 @@ class RequestsController < ApplicationController
         if @request
            @request.update(reconfirmation_date: Time.now)
            if @request.save
+                @request.update(confirm_token: nil)
                 redirect_to waiting_list_path
             else
                 flash[:error] = "Désolé, si cette erreur persiste, merci de nous contacter!"

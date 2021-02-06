@@ -5,8 +5,6 @@ Administrator.destroy_all
 
 Administrator.create(email: "admin@example.com", password: "azerty", first_name: "Admin", last_name: "User")
 
-# number = "06123654"
-
 puts 'Creating 2 unconfirmed requests...'
 2.times do
   request = Request.new(
@@ -19,8 +17,8 @@ puts 'Creating 2 unconfirmed requests...'
   request.save!
 end
 
-puts 'Creating 6 confirmed requests...'
-1.times do
+puts 'Creating 8 confirmed requests...'
+2.times do
     request = Request.new(
     first_name:    Faker::Name.first_name,
     last_name:    Faker::Name.last_name,
@@ -33,7 +31,7 @@ puts 'Creating 6 confirmed requests...'
 )
     request.save!
 end
-1.times do
+2.times do
     request = Request.new(
         first_name:    Faker::Name.first_name,
         last_name:    Faker::Name.last_name,
@@ -75,7 +73,7 @@ end
     request.save!
 end
 puts 'Creating 2 accepted requests...'
-1.times do
+2.times do
     request = Request.new(
         first_name:    Faker::Name.first_name,
         last_name:    Faker::Name.last_name,
