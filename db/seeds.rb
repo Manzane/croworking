@@ -2,6 +2,8 @@ require 'faker'
 
 Request.destroy_all
 
+# Administrator.create(email: "admin@example.com", password: "azerty", first_name: "Admin", last_name: "User")
+
 puts 'Creating 10 unconfirmed requests...'
 10.times do
   request = Request.new(

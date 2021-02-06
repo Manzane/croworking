@@ -9,8 +9,13 @@ class Request < ApplicationRecord
     scope :accepted, -> { where(status: 2) }
     scope :expired, -> { where(status: 3) }
 
+    def full_name
+        "#{first_name} #{last_name}"
+    end
+
     def accept!
-        self.update!(status: 2)  
+        self.status = 2  
+        self.accepted_at = Time.now
         if self.save
             RequestMailer.with(request: self).welcome.deliver_now
         end

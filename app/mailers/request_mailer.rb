@@ -20,7 +20,7 @@ end
     @request = params[:request]
     @total = Request.confirmed.count
     @index = Request.confirmed.order(email_confirmation_date: :desc).pluck(:id).index(@request.id) + 1
-    mail(to: @request.email, subject: 'Bienvenue sur la Liste d\'attente !')
+    mail(to: @request.email, subject: 'Bienvenue sur la Liste d\'attente Coworking !')
   end
 
   def expiration

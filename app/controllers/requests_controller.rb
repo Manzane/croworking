@@ -26,18 +26,6 @@ class RequestsController < ApplicationController
         end
     end
 
-    # def edit
-    # end
-
-    # def update
-    #     @request.update(request_params)
-    #     if  @request.save
-    #         redirect_to request_path(@request), flash: { success: "Update" }
-    #     else
-    #         render :edit, flash: { error: "Could not update model" }  
-    #     end
-    # end
-
     def confirm_email
         request = Request.find_by_confirm_token(params[:token])
         if request
